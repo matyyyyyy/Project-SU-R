@@ -1,1 +1,176 @@
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
+-- Window dum
+
+local Window = Rayfield:CreateWindow({
+    Name = "Project SU:R",
+    LoadingTitle = "Život je hořký, nesnaž se.",
+    LoadingSubtitle = "by Maty",
+    ConfigurationSaving = {
+       Enabled = false,
+       FolderName = nil,
+       FileName = "ProjectSUR"
+    },
+    Discord = {
+       Enabled = false,
+       Invite = "X",
+       RememberJoins = true
+    },
+    KeySystem = true,
+    KeySettings = {
+       Title = "Project SU:R",
+       Subtitle = "by Maty",
+       Note = "Je to divný, ne že ne.",
+       FileName = "PROJECTSUR",
+       SaveKey = true,
+       GrabKeyFromSite = false,
+       Key = "Test Key"
+    }
+ })
+
+ Rayfield:Notify({
+    Title = "Project SU:R",
+    Content = "by Maty \ >> Welcome!",
+    Duration = 3,
+    Image = 4483362458,
+ })
+
+-- Tabs and their sections
+
+local MainTab = Window:CreateTab("Main Functions", 4483362458)
+local MainAutoSection = MainTab:CreateSection("Automation")
+local AutoStandArrowUse = false
+local MainAutoSectionAutoStandArrowT = MainTab:CreateToggle({
+    Name = "Auto Stand Arrow Use",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        AutoStandArrowUse = Value
+    end,
+ })
+game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].ChildAdded:Connect(function(X)
+if AutoStandArrowUse then
+if X.Name == "Stand Arrow" then
+game:service"Workspace".Living[game:service"Players".LocalPlayer.Name][X.Name].Use:FireServer()
+end
+end
+end)
+local AutoChargedArrowUse = false
+local MainAutoSectionAutoChargedArrowT = MainTab:CreateToggle({
+    Name = "Auto Charged Arrow Use",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        AutoChargedArrowUse = Value
+    end,
+ })
+game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].ChildAdded:Connect(function(X)
+if AutoChargedArrowUse then
+if X.Name == "Charged Arrow" then
+game:service"Workspace".Living[game:service"Players".LocalPlayer.Name][X.Name].Use:FireServer()
+end
+end
+end)
+local AutoRokakakaUse = false
+local AutoRokakakaUseConfirm = false
+bypasscallbackerror = function()
+    MainAutoSectionAutoRoakakakaT:Set(false)
+end
+local MainAutoSectionAutoRoakakakaT = MainTab:CreateToggle({
+    Name = "Auto Rokakaka Use",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        if Value then
+            if AutoRokakakaUseConfirm == false then
+                bypasscallbackerror(false)
+                Rayfield:Notify({
+                    Title = "Warning",
+                    Content = "You enabled Auto Rokakaka, be careful!\nDue to security reasons you are required to confirm your action.",
+                    Duration = 6.5,
+                    Image = 4483362458,
+                    Actions = {
+                    Ignore = {
+                        Name = "Enable",
+                        Callback = function()
+                            AutoRokakakaUse = true
+                            AutoRokakakaUseConfirm = true
+                            bypasscallbackerror(true)
+                        end,
+                        },
+                        Ignore2 = {
+                            Name = "Disable",
+                            Callback = function()
+                            AutoRokakakaUseConfirm = false
+                            end,
+                        }
+                    },
+                })
+            end
+        else
+            AutoRokakakaUse = Value
+            AutoRokakakaUseConfirm = false
+        end
+    end,
+})
+bypasscallbackerror = function(val)
+    MainAutoSectionAutoRoakakakaT:Set(val)
+end
+game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].ChildAdded:Connect(function(X)
+if AutoRokakakaUse then
+if X.Name == "Rokakaka" then
+game:service"Workspace".Living[game:service"Players".LocalPlayer.Name][X.Name].Use:FireServer()
+end
+end
+end)
+local MainAutoSection2 = MainTab:CreateSection("Item Farm")
+local MainItemMethodDropdownMethodString = ""
+local MainItemMethodDropdown = MainTab:CreateDropdown({
+    Name = "Select Farming Method >>",
+    Options = {"Method 1","Method 2"},
+    CurrentOption = "Method 1",
+    Flag = "X",
+    Callback = function(Option)
+        MainItemMethodDropdownMethodString = Option
+    end,
+ })
+ local MainAutoSection3 = MainTab:CreateSection("Notifications") -- Jotaro, Johny Spawn, Rare Items [like item notifier]
+ local MainAutoSection3JotaroOverHeavenNTS = false
+ local MainAutoSection3JotaroOverHeavenNT = MainTab:CreateToggle({
+    Name = "Jotaro Over Heaven Spawn Notification",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        MainAutoSection3JotaroOverHeavenNTS = Value
+    end,
+ })
+ local MainAutoSection3JohnnyJoestarNTS = false
+ local MainAutoSection3JohnnyJoestarNT = MainTab:CreateToggle({
+    Name = "Johnny Joestar Spawn Notification",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        MainAutoSection3JohnnyJoestarNTS = Value
+    end,
+ })
+ local MainAutoSection3RareItemsNTS = false
+ local MainAutoSection3RareItemsNT = MainTab:CreateToggle({
+    Name = "Rare Items Spawn Notification",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        MainAutoSection3RareItemsNTS = Value
+    end,
+ })
+
+local MainAutoSection4 = MainTab:CreateSection("Miscellaneous")
+
+local MainAutoSection5 = MainTab:CreateSection("Block Actions") -- Like Rokakaka
+
+local SettingsTab = Window:CreateTab("Settings", 4483362458)
+local SettingsKeybindSection = SettingsTab:CreateSection("Keybinds")
+
+local CreditsTab = Window:CreateTab("Credits", 4483362458)
+local CreditsSection = CreditsTab:CreateSection("Credits")
+CreditsTab:CreateLabel("Maty >> Coding")
+CreditsTab:CreateLabel("Sirius >> UI Library")
