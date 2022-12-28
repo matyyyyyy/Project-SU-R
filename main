@@ -123,6 +123,73 @@ game:service"Workspace".Living[game:service"Players".LocalPlayer.Name][X.Name].U
 end
 end
 end)
+local MainSectionDopdownAutoS = "Rokakaka"
+local MainSectionDopdownAuto = MainTab:CreateDropdown({
+    Name = "Select Item To Drop >>",
+    Options = {"Rokakaka", "Stand Arrow", "Charged Arrow", "Requiem Arrow"},
+    CurrentOption = "Rokakaka",
+    Flag = "X",
+    Callback = function(Option)
+        MainSectionDopdownAutoS = Option
+    end,
+})
+local MainSectionSlideAutoS = 1
+local MainSectionSlideAuto = MainTab:CreateSlider({
+    Name = "Select The Ammount",
+    Range = {1, 100},
+    Increment = 1,
+    Suffix = "",
+    CurrentValue = 1,
+    Flag = "X",
+    Callback = function(Value)
+        MainSectionSlideAutoS = Value
+    end,
+})
+local MainSectionInputS = ""
+local MainSectionInput = MainTab:CreateInput({
+   Name = "Enter Username",
+   PlaceholderText = "Username",
+   RemoveTextAfterFocusLost = false,
+   Callback = function(Text)
+       MainSectionInputS=Text
+   end,
+})
+local MainSectionAutoButton = MainTab:CreateButton({
+    Name = "Drop",
+    Callback = function()
+        for i = 1,MainSectionSlideAutoS do
+            if game:service"Players".LocalPlayer.Backpack:FindFirstChild(MainSectionDopdownAutoS) then
+                local a = game:service"Players".LocalPlayer.Backpack:FindFirstChild(MainSectionDopdownAutoS)
+                game:service"Players".LocalPlayer.Character.Humanoid:EquipTool(a)
+                game:service"Players":Chat("/dropitem")
+            end
+            wait(.1)
+        end
+    end,
+})
+local MainSectionAutoButton2 = MainTab:CreateButton({
+    Name = "Handitem",
+    Callback = function()
+        for i = 1,MainSectionSlideAutoS do
+            if game:service"Players".LocalPlayer.Backpack:FindFirstChild(MainSectionDopdownAutoS) then
+                if game:service"Players":FindFirstChild(MainSectionInputS) then
+                    local a = game:service"Players".LocalPlayer.Backpack:FindFirstChild(MainSectionDopdownAutoS)
+                    game:service"Players".LocalPlayer.Character.Humanoid:EquipTool(a)
+                    game:service"Players":Chat("/handitem "..MainSectionInputS)
+                else
+                    Rayfield:Notify({
+                        Title = "Warning",
+                        Content = "Invalid Username!",
+                        Duration = 6.5,
+                        Image = 4483362458,
+                    })
+                end
+            end
+            wait(.1)
+        end
+    end,
+})
+
 local MainAutoSection2 = MainTab:CreateSection("Item Farm")
 local MainItemMethodDropdownMethodString = ""
 local MainItemMethodDropdown = MainTab:CreateDropdown({
@@ -133,8 +200,8 @@ local MainItemMethodDropdown = MainTab:CreateDropdown({
     Callback = function(Option)
         MainItemMethodDropdownMethodString = Option
     end,
- })
- local MainAutoSection3 = MainTab:CreateSection("Notifications") -- Jotaro, Johny Spawn, Rare Items [like item notifier]
+})
+ local MainAutoSection3 = MainTab:CreateSection("Notifications")
  local MainAutoSection3JotaroOverHeavenNTS = false
  local MainAutoSection3JotaroOverHeavenNT = MainTab:CreateToggle({
     Name = "Jotaro Over Heaven Spawn Notification",
@@ -154,15 +221,22 @@ local MainItemMethodDropdown = MainTab:CreateDropdown({
                 Image = 4483362458,
                 Actions = {
                 Ignore = {
-                    Name = "Alright",
+                    Name = "Teleport",
                     Callback = function()
-
+                        for _UWU_,_MILO_ in pairs(game:service"Workspace".fart2.Idiot:GetChildren()) do
+                            if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+                                if _MILO_.Head:FindFirstChild("Main") then
+                                    if _MILO_.Head.Main.Text.Text == "i_stabman [Lvl. 90+]" then
+                                        _MILO_.Done:FireServer()
+                                    end
+                                end
+                            end
+                        end
                     end,
                     },
                 Ignore2 = {
-                    Name = "Teleport",
+                    Name = "Alright",
                     Callback = function()
-    
                     end,
                     },
                 },
@@ -179,7 +253,7 @@ end)
         MainAutoSection3JohnnyJoestarNTS = Value
     end,
  })
- game:service"Workspace".Living.ChildAdded:Connect(function(X)
+game:service"Workspace".Living.ChildAdded:Connect(function(X)
     if MainAutoSection3JohnnyJoestarNTS then
         if X.Name == "JohnnyJoestar" then
             Rayfield:Notify({
@@ -191,15 +265,14 @@ end)
                 Ignore = {
                     Name = "Teleport",
                     Callback = function()
-
+                        game:service"Players".LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8.53429699, 66.9272919, -268.155212, -0.00210160529, 2.08467155e-09, -0.999997795, 4.68771795e-08, 1, 1.98615857e-09, 0.999997795, -4.6872902e-08, -0.00210160529)
                     end,
                     },
-                },
                 Ignore2 = {
                     Name = "Alright",
                     Callback = function()
-    
                     end,
+                    },
                 },
             })
         end
@@ -213,7 +286,34 @@ end)
     Callback = function(Value)
         MainAutoSection3RareItemsNTS = Value
     end,
- })
+})
+game:service"Workspace".Items.ChildAdded:Connect(function(x)
+    if MainAutoSection3RareItemsNTS then
+        if x.Name == "Red Stone Of Aja Mask" or x.Name == "Kar's Mask" or x.Name == "Dio's Diary" or x.Name == "Rainbow Ornament" then
+            Rayfield:Notify({
+                Title = "Spawn Notification",
+                Content = x.Name.." have been spawned!",
+                Duration = 6.5,
+                Image = 4483362458,
+                Actions = {
+                Ignore = {
+                    Name = "Teleport",
+                    Callback = function()
+                        if x then
+                            game:service"Players".LocalPlayer.Character.HumanoidRootPart.CFrame = x.Handle.CFrame
+                        end
+                    end,
+                    },
+                Ignore2 = {
+                    Name = "Alright",
+                    Callback = function()
+                    end,
+                    },
+                },
+            })
+        end
+    end
+end)
 
 local MainAutoSection4 = MainTab:CreateSection("Auto Buy")
 local MainAutoSection4SliderAmmount = 0
@@ -263,9 +363,117 @@ end
 
 -- UDĚLAT PAK AUTODROP
 
-local MainAutoSection5 = MainTab:CreateSection("Block Actions") -- Like Rokakaka
+local MainSection5 = MainTab:CreateSection("Lair Quest Autofarm") -- Like Rokakaka
+local MainSection5ToggleLairImpossibleT = false
+local MainSection5ToggleLairImpossible = MainTab:CreateToggle({
+    Name = "Lair Quest Lvl. 200+",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        MainSection5ToggleLairImpossibleT = Value
+        if MainSection5ToggleLairImpossibleT then
+            autofarmshitdumass("Boss")
+        end
+    end,
+})
+autofarmshitdumass = function(dumbass)
+    for _UWU_,_MILO_ in pairs(game:service"Workspace".fart2.Idiot:GetChildren()) do
+        if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+            if _MILO_.Head:FindFirstChild("Main") then
+                if _MILO_.Head.Main.Text.Text == "i_stabman [Lvl. 200+]" then
+                    _MILO_.Done:FireServer()
+                end
+            end
+        end
+    end
+    wait(4)
+    while MainSection5ToggleLairImpossibleT do
+        if game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].Aura.Value == false then game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].StandEvents.Summon:FireServer() end
+        for pussy,cock in pairs(game:service"Workspace".Living:GetChildren()) do
+          if cock.Name == dumbass and cock:FindFirstChild("Head") then
+            if cock.Head:FindFirstChild"Display" then
+                if cock.Head.Display.Frame.t.Text == "Jotaro P6 [Dungeon]" then
+                    if game:service"Players".LocalPlayer.Character:FindFirstChild("Humanoid") then
+                        if game:service"Players".LocalPlayer.Character.Humanoid.Health >= 1 then
+                            game:service"Players".LocalPlayer.Character.HumanoidRootPart.CFrame = cock.HumanoidRootPart.CFrame * CFrame.new(0,0,7)
+                            game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].StandEvents.M1:FireServer()
+                            game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].StandEvents.Heavy:FireServer()
+                            wait()
+                        end
+                    end
+                end
+            end
+          end
+       end wait()
+    end
+end
+game:service"Workspace".Living.ChildAdded:Connect(function(x)
+    if MainSection5ToggleLairImpossibleT then
+        if x.Name == game:service"Players".LocalPlayer.Name then
+            autofarmshitdumass("Boss")
+        end
+    end
+end)
 
-local MainAutoSection6 = MainTab:CreateSection("Miscellaneous")
+local MainSection7 = MainTab:CreateSection("Teleports")
+local MainSection7Button = MainTab:CreateButton({
+    Name = "Inner Sanctum",
+    Callback = function()
+        for _UWU_,_MILO_ in pairs(game:service"Workspace".fart2.Idiot:GetChildren()) do
+            if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+                if _MILO_.Head:FindFirstChild("Main") then
+                    if _MILO_.Head.Main.Text.Text == "i_stabman [Lvl. 90+]" then
+                        _MILO_.Done:FireServer()
+                    end
+                end
+            end
+        end
+    end,
+})
+local MainSection7Button2 = MainTab:CreateButton({
+    Name = "Stand Storage",
+    Callback = function()
+        game:service"Workspace".fart2.Idiot.ratio.Done:FireServer()
+    end,
+})
+
+local MainSection8 = MainTab:CreateSection("Block Actions") -- Like Rokakaka
+
+local MainSection9 = MainTab:CreateSection("Miscellaneous")
+local MainSection9Button = MainTab:CreateButton({
+    Name = "Open Stand Storage",
+    Callback = function()
+        for _UWU_,_MILO_ in pairs(game:service"Workspace".fart2.Idiot:GetChildren()) do
+            if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+                if _MILO_.Head:FindFirstChild("Sub") then
+                    if _MILO_.Head.Sub.Text.Text == "Stand Storage" then
+                        _MILO_.Done:FireServer()
+                    end
+                end
+            end
+        end
+    end,
+})
+local MainSection9Button2 = MainTab:CreateButton({
+    Name = "Buy Hamon",
+    Callback = function()
+        for _UWU_,_MILO_ in pairs(game:service"Workspace".fart2.Idiot:GetChildren()) do
+            if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+                if _MILO_.Head:FindFirstChild("Main") then
+                    if _MILO_.Head.Main.Text.Text == "Hamon Dealer" then
+                        _MILO_.Done:FireServer()
+                    end
+                end
+            end
+        end
+    end,
+})
+local MainSection9Button2 = MainTab:CreateButton({
+    Name = "Buy Spin",
+    Callback = function()
+        game:service"ReplicatedStorage".Events.buyGyroHorseSpin:FireServer("Spin")
+    end,
+})
 
 local SettingsTab = Window:CreateTab("Settings", 4483362458)
 local SettingsKeybindSection = SettingsTab:CreateSection("Keybinds")
@@ -278,7 +486,7 @@ CreditsTab:CreateLabel("Sirius >> UI Library")
 local UpdatesTab = Window:CreateTab("Updates", 4483362458)
 local UpdatesSection = UpdatesTab:CreateSection("Updates")
 UpdatesTab:CreateParagraph({Title = "27.12.2022", Content = "[+] Auto --> Stand Arrow, Charged Arrow, Rokakaka Fruit\n[+] JOH, JJ Spawn Notification\n[!] Due to security reasons you are required to confirm your action when enabling Auto Rokakaka Fruit"})
-UpdatesTab:CreateParagraph({Title = "28.12.2022", Content = "[+] Anti Cheat Bypass\n[+] Auto Buy"})
+UpdatesTab:CreateParagraph({Title = "28.12.2022", Content = "[+] Anti Cheat Bypass\n[+] Auto Buy\n[+] Lair Quest Autofarm\n[+] Teleports\n[+] Drop/Hand Items\n[+] Open Stand Storage"})
 
 local Old; Old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     local Method = getnamecallmethod()
