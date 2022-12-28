@@ -218,18 +218,18 @@ end)
 local MainAutoSection4 = MainTab:CreateSection("Auto Buy")
 local MainAutoSection4SliderAmmount = 0
 local MainAutoSection4Slider = MainTab:CreateSlider({
-    Name = "Select the ammount",
-    Range = {0, 100},
+    Name = "Select The Ammount",
+    Range = {1, 100},
     Increment = 1,
     Suffix = "",
-    CurrentValue = 0,
+    CurrentValue = 1,
     Flag = "X",
     Callback = function(Value)
         MainAutoSection4SliderAmmount = Value
         updateammountvaluedum()
     end,
  })
- local MainAutoSection4DropdownString = ""
+ local MainAutoSection4DropdownString = "Rokakaka Fruit(2.75k)"
  local MainAutoSection4Dropdown = MainTab:CreateDropdown({
      Name = "Select The Item >>",
      Options = {"Rokakaka Fruit(2.75k)","Stand Arrow(4k)","Charged Arrow(50k)","Requiem Arrow(1.5M)","Dio Diary(1.5M)","5x Rokakaka(13.75k)","5x Stand Arrow(20k)", "5x Charged Arrow(225k)"},
@@ -240,7 +240,7 @@ local MainAutoSection4Slider = MainTab:CreateSlider({
         updateammountvaluedum()
      end,
 })
-local MainAutoSection4Label = MainTab:CreateLabel("$ 0")
+local MainAutoSection4Label = MainTab:CreateLabel("$ 2750")
 local MainAutoSection4Button = MainTab:CreateButton({
     Name = "Buy",
     Callback = function()
@@ -261,6 +261,8 @@ updateammountvaluedum = function()
     MainAutoSection4Label:Set("$ "..calc1)
 end
 
+-- UDĚLAT PAK AUTODROP
+
 local MainAutoSection5 = MainTab:CreateSection("Block Actions") -- Like Rokakaka
 
 local MainAutoSection6 = MainTab:CreateSection("Miscellaneous")
@@ -276,7 +278,7 @@ CreditsTab:CreateLabel("Sirius >> UI Library")
 local UpdatesTab = Window:CreateTab("Updates", 4483362458)
 local UpdatesSection = UpdatesTab:CreateSection("Updates")
 UpdatesTab:CreateParagraph({Title = "27.12.2022", Content = "[+] Auto --> Stand Arrow, Charged Arrow, Rokakaka Fruit\n[+] JOH, JJ Spawn Notification\n[!] Due to security reasons you are required to confirm your action when enabling Auto Rokakaka Fruit"})
-UpdatesTab:CreateParagraph({Title = "28.12.2022", Content = "[+] Block Rokakaka Use Remote Event"})
+UpdatesTab:CreateParagraph({Title = "28.12.2022", Content = "[+] Anti Cheat Bypass\n[+] Auto Buy"})
 
 local Old; Old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     local Method = getnamecallmethod()
