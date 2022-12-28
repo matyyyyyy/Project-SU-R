@@ -16,7 +16,7 @@ local Window = Rayfield:CreateWindow({
        Invite = "X",
        RememberJoins = true
     },
-    KeySystem = true,
+    KeySystem = false,
     KeySettings = {
        Title = "Project SU:R",
        Subtitle = "by Maty",
@@ -144,6 +144,32 @@ local MainItemMethodDropdown = MainTab:CreateDropdown({
         MainAutoSection3JotaroOverHeavenNTS = Value
     end,
  })
+ game:service"Workspace".Living.ChildAdded:Connect(function(X)
+    if MainAutoSection3JotaroOverHeavenNTS then
+        if X.Name == "Jotaro Over Heaven" then
+            Rayfield:Notify({
+                Title = "Spawn Notification",
+                Content = "Jotaro Over Heaven have been spawned!",
+                Duration = 6.5,
+                Image = 4483362458,
+                Actions = {
+                Ignore = {
+                    Name = "Alright",
+                    Callback = function()
+
+                    end,
+                    },
+                Ignore2 = {
+                    Name = "Teleport",
+                    Callback = function()
+    
+                    end,
+                    },
+                },
+            })
+        end
+    end
+end)
  local MainAutoSection3JohnnyJoestarNTS = false
  local MainAutoSection3JohnnyJoestarNT = MainTab:CreateToggle({
     Name = "Johnny Joestar Spawn Notification",
@@ -153,6 +179,32 @@ local MainItemMethodDropdown = MainTab:CreateDropdown({
         MainAutoSection3JohnnyJoestarNTS = Value
     end,
  })
+ game:service"Workspace".Living.ChildAdded:Connect(function(X)
+    if MainAutoSection3JohnnyJoestarNTS then
+        if X.Name == "JohnnyJoestar" then
+            Rayfield:Notify({
+                Title = "Spawn Notification",
+                Content = "Johnny Joestar have been spawned!",
+                Duration = 6.5,
+                Image = 4483362458,
+                Actions = {
+                Ignore = {
+                    Name = "Teleport",
+                    Callback = function()
+
+                    end,
+                    },
+                },
+                Ignore2 = {
+                    Name = "Alright",
+                    Callback = function()
+    
+                    end,
+                },
+            })
+        end
+    end
+end)
  local MainAutoSection3RareItemsNTS = false
  local MainAutoSection3RareItemsNT = MainTab:CreateToggle({
     Name = "Rare Items Spawn Notification",
@@ -163,9 +215,55 @@ local MainItemMethodDropdown = MainTab:CreateDropdown({
     end,
  })
 
-local MainAutoSection4 = MainTab:CreateSection("Miscellaneous")
+local MainAutoSection4 = MainTab:CreateSection("Auto Buy")
+local MainAutoSection4SliderAmmount = 0
+local MainAutoSection4Slider = MainTab:CreateSlider({
+    Name = "Select the ammount",
+    Range = {0, 100},
+    Increment = 1,
+    Suffix = "",
+    CurrentValue = 0,
+    Flag = "X",
+    Callback = function(Value)
+        MainAutoSection4SliderAmmount = Value
+        updateammountvaluedum()
+    end,
+ })
+ local MainAutoSection4DropdownString = ""
+ local MainAutoSection4Dropdown = MainTab:CreateDropdown({
+     Name = "Select The Item >>",
+     Options = {"Rokakaka Fruit(2.75k)","Stand Arrow(4k)","Charged Arrow(50k)","Requiem Arrow(1.5M)","Dio Diary(1.5M)","5x Rokakaka(13.75k)","5x Stand Arrow(20k)", "5x Charged Arrow(225k)"},
+     CurrentOption = "Rokakaka Fruit(2.75k)",
+     Flag = "X",
+     Callback = function(Option)
+        MainAutoSection4DropdownString = Option
+        updateammountvaluedum()
+     end,
+})
+local MainAutoSection4Label = MainTab:CreateLabel("$ 0")
+local MainAutoSection4Button = MainTab:CreateButton({
+    Name = "Buy",
+    Callback = function()
+        if MainAutoSection4DropdownString == "Rokakaka Fruit(2.75k)" then for i = 1,MainAutoSection4SliderAmmount do game:GetService("ReplicatedStorage").Events.BuyItem:FireServer("Merchant1", "Option2") end end
+        if MainAutoSection4DropdownString == "5x Rokakaka(13.75k)" then for i = 1,MainAutoSection4SliderAmmount do game:GetService("ReplicatedStorage").Events.BuyItem:FireServer("Merchant1", "Option1") end end
+        if MainAutoSection4DropdownString == "Stand Arrow(4k)" then for i = 1,MainAutoSection4SliderAmmount do game:GetService("ReplicatedStorage").Events.BuyItem:FireServer("Merchant1", "Option4") end end
+        if MainAutoSection4DropdownString == "5x Stand Arrow(20k)" then for i = 1,MainAutoSection4SliderAmmount do game:GetService("ReplicatedStorage").Events.BuyItem:FireServer("Merchant1", "Option3") end end
+        if MainAutoSection4DropdownString == "Charged Arrow(50k)" then for i = 1,MainAutoSection4SliderAmmount do game:GetService("ReplicatedStorage").Events.BuyItem:FireServer("Merchantlvl120", "Option2") end end
+        if MainAutoSection4DropdownString == "5x Charged Arrow(225k)" then for i = 1,MainAutoSection4SliderAmmount do game:GetService("ReplicatedStorage").Events.BuyItem:FireServer("Merchantlvl120", "Option1") end end
+        if MainAutoSection4DropdownString == "Dio Diary(1.5M)" then for i = 1,MainAutoSection4SliderAmmount do game:GetService("ReplicatedStorage").Events.BuyItem:FireServer("Merchantlvl120", "Option3") end end
+        if MainAutoSection4DropdownString == "Requiem Arrow(1.5M)" then for i = 1,MainAutoSection4SliderAmmount do game:GetService("ReplicatedStorage").Events.BuyItem:FireServer("Merchantlvl120", "Option4") end end
+    end,
+})
+updateammountvaluedum = function()
+    local vals = { ["Rokakaka Fruit(2.75k)"] = 2750; ["5x Rokakaka(13.75k)"] = 13750; ["Stand Arrow(4k)"] = 4000; ["5x Stand Arrow(20k)"] = 20000; ["Charged Arrow(50k)"] = 50000; ["5x Charged Arrow(225k)"] = 225000; ["Dio Diary(1.5M)"] = 1500000; ["Requiem Arrow(1.5M)"] = 1500000; }
+    local calc2 = vals[MainAutoSection4DropdownString]
+    local calc1 = calc2 * MainAutoSection4SliderAmmount
+    MainAutoSection4Label:Set("$ "..calc1)
+end
 
 local MainAutoSection5 = MainTab:CreateSection("Block Actions") -- Like Rokakaka
+
+local MainAutoSection6 = MainTab:CreateSection("Miscellaneous")
 
 local SettingsTab = Window:CreateTab("Settings", 4483362458)
 local SettingsKeybindSection = SettingsTab:CreateSection("Keybinds")
@@ -174,3 +272,19 @@ local CreditsTab = Window:CreateTab("Credits", 4483362458)
 local CreditsSection = CreditsTab:CreateSection("Credits")
 CreditsTab:CreateLabel("Maty >> Coding")
 CreditsTab:CreateLabel("Sirius >> UI Library")
+
+local UpdatesTab = Window:CreateTab("Updates", 4483362458)
+local UpdatesSection = UpdatesTab:CreateSection("Updates")
+UpdatesTab:CreateParagraph({Title = "27.12.2022", Content = "[+] Auto --> Stand Arrow, Charged Arrow, Rokakaka Fruit\n[+] JOH, JJ Spawn Notification\n[!] Due to security reasons you are required to confirm your action when enabling Auto Rokakaka Fruit"})
+UpdatesTab:CreateParagraph({Title = "28.12.2022", Content = "[+] Block Rokakaka Use Remote Event"})
+
+local Old; Old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
+    local Method = getnamecallmethod()
+    if Method == "Raycast" or Method == "Kick" or Method == "FireServer" and tostring(self) == "PlayerStandMainHandle" then
+        return wait(9e9)
+    end
+    return Old(self, ...)
+end))
+for _, Connection in pairs(getconnections(Client.Idled)) do
+    Connection:Disable()
+ end
