@@ -361,9 +361,7 @@ updateammountvaluedum = function()
     MainAutoSection4Label:Set("$ "..calc1)
 end
 
--- UDĚLAT PAK AUTODROP
-
-local MainSection5 = MainTab:CreateSection("Lair Quest Autofarm") -- Like Rokakaka
+local MainSection5 = MainTab:CreateSection("Lair Quest Autofarm")
 local MainSection5ToggleLairImpossibleT = false
 local MainSection5ToggleLairImpossible = MainTab:CreateToggle({
     Name = "Lair Quest Lvl. 200+",
@@ -415,8 +413,68 @@ game:service"Workspace".Living.ChildAdded:Connect(function(x)
     end
 end)
 
-local MainSection7 = MainTab:CreateSection("Teleports")
-local MainSection7Button = MainTab:CreateButton({
+local MainSection7 = MainTab:CreateSection("Quest Autofarm")
+local MainSection7ToggleQuestPillarMenT = false
+local MainSection7ToggleQuestPillarMen = MainTab:CreateToggle({
+    Name = "Pillermen Quest Lvl. 300+",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        MainSection7ToggleQuestPillarMenT = Value
+        if MainSection7ToggleQuestPillarMenT then
+            autofarmpillarmenshit()
+        end
+    end,
+})
+autofarmpillarmenshit = function() -- Add KCR mode
+    for _UWU_,_MILO_ in pairs(game:service"Workspace".fart2.Idiot:GetChildren()) do
+        if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+            if _MILO_.Head:FindFirstChild("Main") then
+                if _MILO_.Head.Main.Text.Text == "Young Joseph [Lvl. 300+]" then
+                    _MILO_.QuestDone:FireServer()
+                    _MILO_.Done:FireServer()
+                end
+            end
+        end
+    end
+    while MainSection7ToggleQuestPillarMenT do
+        if game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].Aura.Value == false then game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].StandEvents.Summon:FireServer() end
+        for pussy,cock in pairs(game:service"Workspace".Living:GetChildren()) do
+            if cock.Name == "Pillerman" then
+                if cock:FindFirstChild("Humanoid") then
+                    if not(cock.Humanoid.Health == 0) then
+                        game:service"Players".LocalPlayer.Character.HumanoidRootPart.CFrame = cock.HumanoidRootPart.CFrame * CFrame.new(0,0,7)
+                        game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].StandEvents.M1:FireServer()
+                        game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].StandEvents.Heavy:FireServer()
+                        for _UWU_,_MILO_ in pairs(game:service"Workspace".fart2.Idiot:GetChildren()) do
+                            if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+                                if _MILO_.Head:FindFirstChild("Main") then
+                                    if _MILO_.Head.Main.Text.Text == "Young Joseph [Lvl. 300+]" then
+                                        _MILO_.QuestDone:FireServer()
+                                        _MILO_.Done:FireServer()
+                                    end
+                                end
+                            end
+                        end
+                    else
+                        game:service"Players".LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(246.663956, 69.8958282, 194.024719, 0.905767024, -0.15422006, 0.394717991, 3.72383946e-09, 0.931430697, 0.363918781, -0.423776031, -0.329625636, 0.843659163)
+                    end
+                end
+            end
+        end wait()
+    end
+end
+game:service"Workspace".Living.ChildAdded:Connect(function(x)
+    if MainSection7ToggleQuestPillarMenT then
+        if x.Name == game:service"Players".LocalPlayer.Name then
+            wait(1)
+            autofarmpillarmenshit()
+        end
+    end
+end)
+
+local MainSection8 = MainTab:CreateSection("Teleports")
+local MainSection8Button = MainTab:CreateButton({
     Name = "Inner Sanctum",
     Callback = function()
         for _UWU_,_MILO_ in pairs(game:service"Workspace".fart2.Idiot:GetChildren()) do
@@ -430,17 +488,17 @@ local MainSection7Button = MainTab:CreateButton({
         end
     end,
 })
-local MainSection7Button2 = MainTab:CreateButton({
+local MainSection8Button2 = MainTab:CreateButton({
     Name = "Stand Storage",
     Callback = function()
         game:service"Workspace".fart2.Idiot.ratio.Done:FireServer()
     end,
 })
 
-local MainSection8 = MainTab:CreateSection("Block Actions") -- Like Rokakaka
+local MainSection9 = MainTab:CreateSection("Block Actions") -- Like Rokakaka
 
-local MainSection9 = MainTab:CreateSection("Miscellaneous")
-local MainSection9Button = MainTab:CreateButton({
+local MainSection10 = MainTab:CreateSection("Miscellaneous")
+local MainSection10Button = MainTab:CreateButton({
     Name = "Open Stand Storage",
     Callback = function()
         for _UWU_,_MILO_ in pairs(game:service"Workspace".fart2.Idiot:GetChildren()) do
@@ -454,7 +512,7 @@ local MainSection9Button = MainTab:CreateButton({
         end
     end,
 })
-local MainSection9Button2 = MainTab:CreateButton({
+local MainSection10Button2 = MainTab:CreateButton({
     Name = "Buy Hamon",
     Callback = function()
         for _UWU_,_MILO_ in pairs(game:service"Workspace".fart2.Idiot:GetChildren()) do
@@ -468,7 +526,7 @@ local MainSection9Button2 = MainTab:CreateButton({
         end
     end,
 })
-local MainSection9Button2 = MainTab:CreateButton({
+local MainSection10Button2 = MainTab:CreateButton({
     Name = "Buy Spin",
     Callback = function()
         game:service"ReplicatedStorage".Events.buyGyroHorseSpin:FireServer("Spin")
@@ -487,6 +545,7 @@ local UpdatesTab = Window:CreateTab("Updates", 4483362458)
 local UpdatesSection = UpdatesTab:CreateSection("Updates")
 UpdatesTab:CreateParagraph({Title = "27.12.2022", Content = "[+] Auto --> Stand Arrow, Charged Arrow, Rokakaka Fruit\n[+] JOH, JJ Spawn Notification\n[!] Due to security reasons you are required to confirm your action when enabling Auto Rokakaka Fruit"})
 UpdatesTab:CreateParagraph({Title = "28.12.2022", Content = "[+] Anti Cheat Bypass\n[+] Auto Buy\n[+] Lair Quest Autofarm\n[+] Teleports\n[+] Drop/Hand Items\n[+] Open Stand Storage"})
+UpdatesTab:CreateParagraph({Title = "29.12.2022", Content = "[+] Quest Autofarm"})
 
 local Old; Old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     local Method = getnamecallmethod()
