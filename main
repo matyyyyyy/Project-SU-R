@@ -317,7 +317,7 @@ game:service"Workspace".Items.ChildAdded:Connect(function(x)
 end)
 
 local MainAutoSection4 = MainTab:CreateSection("Auto Buy")
-local MainAutoSection4SliderAmmount = 0
+local MainAutoSection4SliderAmmount = 1
 local MainAutoSection4Slider = MainTab:CreateSlider({
     Name = "Select The Ammount",
     Range = {1, 100},
