@@ -114,10 +114,12 @@ local MainAutoSectionAutoRoakakakaT = MainTab:CreateToggle({
                     Ignore = {
                         Name = "Enable",
                         Callback = function()
-                            getgenv().AutoRokakakaUse = true
-                            AutoRokakakaShitF()
                             AutoRokakakaUseConfirm = true
                             bypasscallbackerror(true)
+                            getgenv().AutoRokakakaUse = true
+                            S = function()
+                                AutoRokakakaShitF()
+                            end
                         end,
                         },
                         Ignore2 = {
@@ -131,7 +133,7 @@ local MainAutoSectionAutoRoakakakaT = MainTab:CreateToggle({
                 })
             end
         else
-            getgenv().AutoRokakakaUse = Value
+            getgenv().AutoRokakakaUse = false
             AutoRokakakaUseConfirm = false
         end
     end,
@@ -456,7 +458,7 @@ local MainSection7ToggleQuestPillarMen = MainTab:CreateToggle({
         end
     end,
 })
-autofarmpillarmenshit = function() -- Add KCR mode
+autofarmpillarmenshit = function()
     for _UWU_,_MILO_ in pairs(game:service"Workspace".D4CStuff.Idiot:GetChildren()) do
         if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
             if _MILO_.Head:FindFirstChild("Main") then
