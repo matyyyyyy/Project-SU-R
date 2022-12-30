@@ -35,42 +35,63 @@ local Window = Rayfield:CreateWindow({
     Image = 4483362458,
  })
 
+-- getgenvs check
+
+if getgenv().AutoChargedArrowUse then getgenv().AutoChargedArrowUse = false end
+if getgenv().AutoStandArrowUse then getgenv().AutoStandArrowUse = false end
+if getgenv().AutoRokakakaUse then getgenv().AutoRokakakaUse = false end
+
 -- Tabs and their sections
 
 local MainTab = Window:CreateTab("Main Functions", 4483362458)
 local MainAutoSection = MainTab:CreateSection("Automation")
-local AutoStandArrowUse = false
 local MainAutoSectionAutoStandArrowT = MainTab:CreateToggle({
     Name = "Auto Stand Arrow Use",
     CurrentValue = false,
     Flag = "X",
     Callback = function(Value)
-        AutoStandArrowUse = Value
+        getgenv().AutoStandArrowUse = Value
+        if getgenv().AutoStandArrowUse then
+            AutoStandArrowUseShitF()
+        end
     end,
  })
-game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].ChildAdded:Connect(function(X)
-if AutoStandArrowUse then
-if X.Name == "Stand Arrow" then
-game:service"Workspace".Living[game:service"Players".LocalPlayer.Name][X.Name].Use:FireServer()
+AutoStandArrowUseShitF = function()
+    while wait() do
+        if getgenv().AutoStandArrowUse then
+            if game:service"Workspace".Living:FindFirstChild(game:service"Players".LocalPlayer.Name) then
+                if game:service"Workspace".Living[game:service"Players".LocalPlayer.Name]:FindFirstChild("Stand Arrow") then
+                    game:service"Workspace".Living[game:service"Players".LocalPlayer.Name]["Stand Arrow"].Use:FireServer()
+                end
+            end
+        end
+    end
 end
-end
-end)
-local AutoChargedArrowUse = false
+game:service"Workspace".Living.ChildAdded:Connect(function(X) wait(2) if getgenv().AutoStandArrowUse then if X.Name == game:service"Players".LocalPlayer.Name then AutoStandArrowUseShitF() end end end)
 local MainAutoSectionAutoChargedArrowT = MainTab:CreateToggle({
     Name = "Auto Charged Arrow Use",
     CurrentValue = false,
     Flag = "X",
     Callback = function(Value)
-        AutoChargedArrowUse = Value
+        getgenv().AutoChargedArrowUse = Value
+        if getgenv().AutoChargedArrowUse then
+            AutoChargedArrowUseShitF()
+        end
     end,
- })
-game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].ChildAdded:Connect(function(X)
-if AutoChargedArrowUse then
-if X.Name == "Charged Arrow" then
-game:service"Workspace".Living[game:service"Players".LocalPlayer.Name][X.Name].Use:FireServer()
+})
+AutoChargedArrowUseShitF = function()
+    while wait() do
+        if getgenv().AutoChargedArrowUse then
+            if game:service"Workspace".Living:FindFirstChild(game:service"Players".LocalPlayer.Name) then
+                if game:service"Workspace".Living[game:service"Players".LocalPlayer.Name]:FindFirstChild("Charged Arrow") then
+                    game:service"Workspace".Living[game:service"Players".LocalPlayer.Name]["Charged Arrow"].Use:FireServer()
+                end
+            end
+        end
+    end
 end
-end
-end)
+game:service"Workspace".Living.ChildAdded:Connect(function(X) wait(2) if getgenv().AutoChargedArrowUse then if X.Name == game:service"Players".LocalPlayer.Name then AutoChargedArrowUseShitF() end end end)
+
 local AutoRokakakaUse = false
 local AutoRokakakaUseConfirm = false
 bypasscallbackerror = function()
@@ -93,7 +114,8 @@ local MainAutoSectionAutoRoakakakaT = MainTab:CreateToggle({
                     Ignore = {
                         Name = "Enable",
                         Callback = function()
-                            AutoRokakakaUse = true
+                            getgenv().AutoRokakakaUse = true
+                            AutoRokakakaShitF()
                             AutoRokakakaUseConfirm = true
                             bypasscallbackerror(true)
                         end,
@@ -108,7 +130,7 @@ local MainAutoSectionAutoRoakakakaT = MainTab:CreateToggle({
                 })
             end
         else
-            AutoRokakakaUse = Value
+            getgenv().AutoRokakakaUse = Value
             AutoRokakakaUseConfirm = false
         end
     end,
@@ -116,13 +138,19 @@ local MainAutoSectionAutoRoakakakaT = MainTab:CreateToggle({
 bypasscallbackerror = function(val)
     MainAutoSectionAutoRoakakakaT:Set(val)
 end
-game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].ChildAdded:Connect(function(X)
-if AutoRokakakaUse then
-if X.Name == "Rokakaka" then
-game:service"Workspace".Living[game:service"Players".LocalPlayer.Name][X.Name].Use:FireServer()
+AutoRokakakaShitF = function()
+    while wait() do
+        if getgenv().AutoRokakakaUse then
+            if game:service"Workspace".Living:FindFirstChild(game:service"Players".LocalPlayer.Name) then
+                if game:service"Workspace".Living[game:service"Players".LocalPlayer.Name]:FindFirstChild("Rokakaka") then
+                    game:service"Workspace".Living[game:service"Players".LocalPlayer.Name]["Rokakaka"].Use:FireServer()
+                end
+            end
+        end
+    end
 end
-end
-end)
+game:service"Workspace".Living.ChildAdded:Connect(function(X) wait(2) if getgenv().AutoRokakakaUse then if X.Name == game:service"Players".LocalPlayer.Name then AutoRokakakaShitF() end end end)
+
 local MainSectionDopdownAutoS = "Rokakaka"
 local MainSectionDopdownAuto = MainTab:CreateDropdown({
     Name = "Select Item To Drop >>",
@@ -559,6 +587,7 @@ local UpdatesSection = UpdatesTab:CreateSection("Updates")
 UpdatesTab:CreateParagraph({Title = "27.12.2022", Content = "[+] Auto --> Stand Arrow, Charged Arrow, Rokakaka Fruit\n[+] JOH, JJ Spawn Notification\n[!] Due to security reasons you are required to confirm your action when enabling Auto Rokakaka Fruit"})
 UpdatesTab:CreateParagraph({Title = "28.12.2022", Content = "[+] Anti Cheat Bypass\n[+] Auto Buy\n[+] Lair Quest Autofarm\n[+] Teleports\n[+] Drop/Hand Items\n[+] Open Stand Storage"})
 UpdatesTab:CreateParagraph({Title = "29.12.2022", Content = "[+] Quest Autofarm\n[!] Some things were patched during current game update, all of those things are now working again"})
+UpdatesTab:CreateParagraph({Title = "30.12.2022", Content = "[*] Fixed Auto Stand Arrow, Charged Arrow, Rokakaka bugs"})
 
 local Old; Old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     local Method = getnamecallmethod()
@@ -569,4 +598,4 @@ local Old; Old = hookmetamethod(game, "__namecall", newcclosure(function(self, .
 end))
 for _, Connection in pairs(getconnections(Client.Idled)) do
     Connection:Disable()
- end
+end
