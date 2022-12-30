@@ -123,7 +123,8 @@ local MainAutoSectionAutoRoakakakaT = MainTab:CreateToggle({
                         Ignore2 = {
                             Name = "Disable",
                             Callback = function()
-                            AutoRokakakaUseConfirm = false
+                                AutoRokakakaUseConfirm = false
+                                getgenv().AutoRokakakaUse = false
                             end,
                         }
                     },
