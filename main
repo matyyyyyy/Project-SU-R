@@ -117,9 +117,6 @@ local MainAutoSectionAutoRoakakakaT = MainTab:CreateToggle({
                             AutoRokakakaUseConfirm = true
                             bypasscallbackerror(true)
                             getgenv().AutoRokakakaUse = true
-                            S = function()
-                                AutoRokakakaShitF()
-                            end
                         end,
                         },
                         Ignore2 = {
@@ -131,6 +128,7 @@ local MainAutoSectionAutoRoakakakaT = MainTab:CreateToggle({
                         }
                     },
                 })
+                AutoRokakakaShitF()
             end
         else
             getgenv().AutoRokakakaUse = false
