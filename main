@@ -37,7 +37,7 @@ local Window = Rayfield:CreateWindow({
 
 -- PATH
 
-local IdiotPath = game:service"Workspace".Map.D4CStuff
+local IdiotPath = game:service"Workspace".Map.NPCs
 
 -- getgenvs check
 
@@ -258,7 +258,7 @@ local MainItemMethodDropdown = MainTab:CreateDropdown({
                     Name = "Teleport",
                     Callback = function()
                         for _UWU_,_MILO_ in pairs(IdiotPath.Idiot:GetChildren()) do
-                            if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+                            if _MILO_:FindFirstChild("Head") then
                                 if _MILO_.Head:FindFirstChild("Main") then
                                     if _MILO_.Head.Main.Text.Text == "i_stabman [Lvl. 90+]" then
                                         _MILO_.Done:FireServer()
@@ -409,8 +409,8 @@ local MainSection5ToggleLairImpossible = MainTab:CreateToggle({
     end,
 })
 autofarmshitdumass = function(dumbass)
-    for _UWU_,_MILO_ in pairs(IdiotPath.Idiot:GetChildren()) do
-        if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+    for _UWU_,_MILO_ in pairs(IdiotPath:GetChildren()) do
+        if _MILO_:FindFirstChild("Head") then
             if _MILO_.Head:FindFirstChild("Main") then
                 if _MILO_.Head.Main.Text.Text == "i_stabman [Lvl. 200+]" then
                     _MILO_.Done:FireServer()
@@ -461,8 +461,8 @@ local MainSection7ToggleQuestPillarMen = MainTab:CreateToggle({
     end,
 })
 autofarmpillarmenshit = function()
-    for _UWU_,_MILO_ in pairs(IdiotPath.Idiot:GetChildren()) do
-        if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+    for _UWU_,_MILO_ in pairs(IdiotPath:GetChildren()) do
+        if _MILO_:FindFirstChild("Head") then
             if _MILO_.Head:FindFirstChild("Main") then
                 if _MILO_.Head.Main.Text.Text == "Young Joseph [Lvl. 300+]" then
                     _MILO_.QuestDone:FireServer()
@@ -480,8 +480,8 @@ autofarmpillarmenshit = function()
                         game:service"Players".LocalPlayer.Character.HumanoidRootPart.CFrame = cock.HumanoidRootPart.CFrame * CFrame.new(0,0,7)
                         game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].StandEvents.M1:FireServer()
                         game:service"Workspace".Living[game:service"Players".LocalPlayer.Name].StandEvents.Heavy:FireServer()
-                        for _UWU_,_MILO_ in pairs(IdiotPath.Idiot:GetChildren()) do
-                            if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+                        for _UWU_,_MILO_ in pairs(IdiotPath:GetChildren()) do
+                            if _MILO_:FindFirstChild("Head") then
                                 if _MILO_.Head:FindFirstChild("Main") then
                                     if _MILO_.Head.Main.Text.Text == "Young Joseph [Lvl. 300+]" then
                                         _MILO_.QuestDone:FireServer()
@@ -511,8 +511,8 @@ local MainSection8 = MainTab:CreateSection("Teleports")
 local MainSection8Button = MainTab:CreateButton({
     Name = "Inner Sanctum",
     Callback = function()
-        for _UWU_,_MILO_ in pairs(IdiotPath.Idiot:GetChildren()) do
-            if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+        for _UWU_,_MILO_ in pairs(IdiotPath:GetChildren()) do
+            if _MILO_:FindFirstChild("Head") then
                 if _MILO_.Head:FindFirstChild("Main") then
                     if _MILO_.Head.Main.Text.Text == "i_stabman [Lvl. 90+]" then
                         _MILO_.Done:FireServer()
@@ -525,7 +525,15 @@ local MainSection8Button = MainTab:CreateButton({
 local MainSection8Button2 = MainTab:CreateButton({
     Name = "Stand Storage",
     Callback = function()
-        IdiotPath.Idiot.ratio.Done:FireServer()
+        for _UWU_,_MILO_ in pairs(IdiotPath:GetChildren()) do
+            if _MILO_:FindFirstChild("Head") then
+                if _MILO_.Head:FindFirstChild("Sub") then
+                    if _MILO_.Head.Sub.Text.Text == "Storage Room" then
+                        _MILO_.Done:FireServer()
+                    end
+                end
+            end
+        end
     end,
 })
 
@@ -547,8 +555,8 @@ local MainSection10 = MainTab:CreateSection("Miscellaneous")
 local MainSection10Button = MainTab:CreateButton({
     Name = "Open Stand Storage",
     Callback = function()
-        for _UWU_,_MILO_ in pairs(IdiotPath.Idiot:GetChildren()) do
-            if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+        for _UWU_,_MILO_ in pairs(IdiotPath:GetChildren()) do
+            if _MILO_:FindFirstChild("Head") then
                 if _MILO_.Head:FindFirstChild("Sub") then
                     if _MILO_.Head.Sub.Text.Text == "Stand Storage" then
                         _MILO_.Done:FireServer()
@@ -561,8 +569,8 @@ local MainSection10Button = MainTab:CreateButton({
 local MainSection10Button2 = MainTab:CreateButton({
     Name = "Buy Hamon",
     Callback = function()
-        for _UWU_,_MILO_ in pairs(IdiotPath.Idiot:GetChildren()) do
-            if _MILO_.Name == "ratio" and _MILO_:FindFirstChild("Head") then
+        for _UWU_,_MILO_ in pairs(IdiotPath:GetChildren()) do
+            if _MILO_:FindFirstChild("Head") then
                 if _MILO_.Head:FindFirstChild("Main") then
                     if _MILO_.Head.Main.Text.Text == "Hamon Dealer" then
                         _MILO_.Done:FireServer()
@@ -589,7 +597,7 @@ CreditsTab:CreateLabel("Sirius >> UI Library")
 
 local UpdatesTab = Window:CreateTab("Updates", 4483362458)
 local UpdatesSection = UpdatesTab:CreateSection("Updates")
-UpdatesTab:CreateParagraph({Title = "27.12.2022", Content = "[+] Auto --> Stand Arrow, Charged Arrow, Rokakaka Fruit\n[+] JOH, JJ Spawn Notification\n[!] Due to security reasons you are required to confirm your action when enabling Auto Rokakaka Fruit"})
+UpdatesTab:CreateParagraph({Title = "27.12.2022", Content = "[+] Auto --> Stand Arrow, Charged Arrow, Rokakaka Fruit\n[+] JOH, JJ, Rare Items Spawn Notification\n[!] Due to security reasons you are required to confirm your action when enabling Auto Rokakaka Fruit"})
 UpdatesTab:CreateParagraph({Title = "28.12.2022", Content = "[+] Anti Cheat Bypass\n[+] Auto Buy\n[+] Lair Quest Autofarm\n[+] Teleports\n[+] Drop/Hand Items\n[+] Open Stand Storage"})
 UpdatesTab:CreateParagraph({Title = "29.12.2022", Content = "[+] Quest Autofarm\n[*] Some things were patched during current game update, all of those things are now working again"})
 UpdatesTab:CreateParagraph({Title = "30.12.2022", Content = "[*] Fixed Auto Stand Arrow, Charged Arrow, Rokakaka bugs\n[*] Updated to current game version"})
