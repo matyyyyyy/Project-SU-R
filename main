@@ -488,6 +488,33 @@ local MainSectionLazyBB = MainTab:CreateToggle({
         end
     end,
 })
+local MainSectionLazyBBB2 = MainTab:CreateToggle({
+    Name = "Glass Cannon",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        if Value then
+            if find(WhitelistedAttributes, "Glass Cannon") then
+            else
+                table.insert(WhitelistedAttributes, "Glass Cannon")
+            end
+            for i,v in pairs(WhitelistedAttributes) do
+                print(v)
+            end
+        else
+            if find(WhitelistedAttributes, "Glass Cannon") then
+                for i,v in pairs(WhitelistedAttributes) do
+                    if v == "Glass Cannon" then
+                        table.remove(WhitelistedAttributes,i)
+                    end
+                end
+            end
+            for i,v in pairs(WhitelistedAttributes) do
+                print(v)
+            end
+        end
+    end,
+})
 local MainSectionLazyBBB = MainTab:CreateToggle({
     Name = "Legendary",
     CurrentValue = false,
