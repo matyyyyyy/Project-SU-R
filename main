@@ -41,6 +41,7 @@ local IdiotPath = game:service"Workspace".Map.NPCs
 
 -- getgenvs check
 
+if getgenv().EAoAuAx then getgenv().EAoAuAx = false end
 if getgenv().AutoChargedArrowUse then getgenv().AutoChargedArrowUse = false end
 if getgenv().AutoStandArrowUse then getgenv().AutoStandArrowUse = false end
 if getgenv().AutoRokakakaUse then getgenv().AutoRokakakaUse = false end
@@ -395,6 +396,204 @@ updateammountvaluedum = function()
     MainAutoSection4Label:Set("$ "..calc1)
 end
 
+local MainSectionLazy = MainTab:CreateSection("Stand Autofarm")
+function find(t,r)
+    for i,v in pairs(t)do
+        if v==r then return true end
+    end
+   return false
+end
+local WhitelistedAttributes = {}
+MainTab:CreateLabel("Select Arrow Type")
+local MainSectionLazyB2
+local CurrentMainSectionLazyArrowType = ""
+local MainSectionLazyB1 = MainTab:CreateToggle({
+    Name = "Stand Arrow",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        if Value then
+            CurrentMainSectionLazyArrowType="Stand Arrow"
+            MainSectionLazyB2:Set(false)
+        elseif Value == false and CurrentMainSectionLazyArrowType == "Stand Arrow" then
+            CurrentMainSectionLazyArrowType=""
+        end
+    end,
+})
+MainSectionLazyB2 = MainTab:CreateToggle({
+    Name = "Charged Arrow",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        if Value then
+            CurrentMainSectionLazyArrowType="Charged Arrow"
+            MainSectionLazyB1:Set(false)
+        elseif Value == false and CurrentMainSectionLazyArrowType == "Charged Arrow" then
+            CurrentMainSectionLazyArrowType=""
+        end
+    end,
+})
+MainTab:CreateLabel("Select Attributes")
+local MainSectionLazyB = MainTab:CreateToggle({
+    Name = "None",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        if Value then
+            if find(WhitelistedAttributes, "None") then
+            else
+                table.insert(WhitelistedAttributes, "None")
+            end
+            for i,v in pairs(WhitelistedAttributes) do
+                print(v)
+            end
+        else
+            if find(WhitelistedAttributes, "None") then
+                for i,v in pairs(WhitelistedAttributes) do
+                    if v == "None" then
+                        table.remove(WhitelistedAttributes,i)
+                    end
+                end
+            end
+            for i,v in pairs(WhitelistedAttributes) do
+                print(v)
+            end
+        end
+    end,
+})
+local MainSectionLazyBB = MainTab:CreateToggle({
+    Name = "Daemon",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        if Value then
+            if find(WhitelistedAttributes, "Daemon") then
+            else
+                table.insert(WhitelistedAttributes, "Daemon")
+            end
+            for i,v in pairs(WhitelistedAttributes) do
+                print(v)
+            end
+        else
+            if find(WhitelistedAttributes, "Daemon") then
+                for i,v in pairs(WhitelistedAttributes) do
+                    if v == "Daemon" then
+                        table.remove(WhitelistedAttributes,i)
+                    end
+                end
+            end
+            for i,v in pairs(WhitelistedAttributes) do
+                print(v)
+            end
+        end
+    end,
+})
+local MainSectionLazyBBB = MainTab:CreateToggle({
+    Name = "Legendary",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        if Value then
+            if find(WhitelistedAttributes, "Legendary") then
+            else
+                table.insert(WhitelistedAttributes, "Legendary")
+            end
+            for i,v in pairs(WhitelistedAttributes) do
+                print(v)
+            end
+        else
+            if find(WhitelistedAttributes, "Legendary") then
+                for i,v in pairs(WhitelistedAttributes) do
+                    if v == "Legendary" then
+                        table.remove(WhitelistedAttributes,i)
+                    end
+                end
+            end
+            for i,v in pairs(WhitelistedAttributes) do
+                print(v)
+            end
+        end
+    end,
+})
+MainTab:CreateLabel("Toggle")
+local MainSectionLazyBBBB = MainTab:CreateToggle({
+    Name = "Enable Autofarm",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        getgenv().EAoAuAx = Value
+        if Value then
+            AutofarmStandShit()
+        end
+    end,
+})
+AutofarmStandShit = function()
+    if getgenv().EAoAuAx then
+        if not(CurrentMainSectionLazyArrowType == "") then
+            if game:service"Players".LocalPlayer.Data.Stand.Value == "None" then
+                if not(CurrentMainSectionLazyArrowType == "") then
+                    if game:service"Players".LocalPlayer.Backpack:FindFirstChild(CurrentMainSectionLazyArrowType) then
+                        game:service"Players".LocalPlayer.Character.Humanoid:EquipTool(game:service"Players".LocalPlayer.Backpack:FindFirstChild(CurrentMainSectionLazyArrowType))
+                        game:service"Players".LocalPlayer.Character[CurrentMainSectionLazyArrowType].Use:FireServer()
+                    else
+                        getgenv().EAoAuAx = false
+                        MainSectionLazyBBBB:Set(false)
+                        Rayfield:Notify({
+                            Title = "Stand Autofarm Notification",
+                            Content = "You ran out of "..CurrentMainSectionLazyArrowType.."!",
+                            Duration = 6.5,
+                            Image = 4483362458,
+                            Actions = {
+                                Ignore = {
+                                    Name = "Alright",
+                                    Callback = function()
+                                    end,
+                                },
+                            },
+                        })
+                    end
+                end
+            end
+            if not(game:service"Players".LocalPlayer.Data.Stand.Value == "None") then
+                if not(find(WhitelistedAttributes, game:service"Players".LocalPlayer.Data.Attri.Value)) then
+                    if game:service"Players".LocalPlayer.Backpack:FindFirstChild("Rokakaka") then
+                        game:service"Players".LocalPlayer.Character.Humanoid:EquipTool(game:service"Players".LocalPlayer.Backpack:FindFirstChild("Rokakaka"))
+                        game:service"Players".LocalPlayer.Character["Rokakaka"].Use:FireServer()
+                    else
+                        getgenv().EAoAuAx = false
+                        MainSectionLazyBBBB:Set(false)
+                        Rayfield:Notify({
+                            Title = "Stand Autofarm Notification",
+                            Content = "You ran out of Rokakakas!",
+                            Duration = 6.5,
+                            Image = 4483362458,
+                            Actions = {
+                                Ignore = {
+                                    Name = "Alright",
+                                    Callback = function()
+                                    end,
+                                },
+                            },
+                        })
+                    end
+                end
+            end
+        else
+            getgenv().EAoAuAx = false
+            MainSectionLazyBBBB:Set(false)
+            Rayfield:Notify({
+                Title = "Stand Autofarm Notification",
+                Content = "Select Stand Arrow Type!",
+                Duration = 6.5,
+                Image = 4483362458,
+            })
+        end
+    end
+end
+game:service"Players".LocalPlayer.Data.Stand.Changed:Connect(function() if getgenv().EAoAuAx then wait(2) AutofarmStandShit() end end)
+game:service"Players".LocalPlayer.Data.Attri.Changed:Connect(function() if getgenv().EAoAuAx then wait(2) AutofarmStandShit() end end)
+game:service"Workspace".Living.ChildAdded:Connect(function(x) if getgenv().EAoAuAx then if x.Name == game:service"Players".LocalPlayer.Name then getgenv().EAoAuAx = false MainSectionLazyBBBB:Set(false) end end end)
+
 local MainSection5 = MainTab:CreateSection("Lair Quest Autofarm")
 local MainSection5ToggleLairImpossibleT = false
 local MainSection5ToggleLairImpossible = MainTab:CreateToggle({
@@ -550,6 +749,32 @@ local MainSection9Button = MainTab:CreateButton({
         end))
     end,
 })
+local MainAutoSectionAutoStandArrowTV = false
+local MainAutoSectionAutoStandArrowT = MainTab:CreateToggle({
+    Name = "Block >> Paralyze | Stun",
+    CurrentValue = false,
+    Flag = "X",
+    Callback = function(Value)
+        MainAutoSectionAutoStandArrowTV = Value
+        if Value then
+            BlockParalyzeStunF()
+        end
+    end,
+})
+BlockParalyzeStunF = function()
+    game:service"Players".LocalPlayer.Character.Humanoid.Changed:Connect(function()
+        if MainAutoSectionAutoStandArrowTV then
+            if game:service"Players".LocalPlayer.Character.Humanoid.PlatformStand then
+                game:service"Players".LocalPlayer.Character.Humanoid.PlatformStand = false
+            end
+        end
+    end)
+end
+game:service"Workspace".Living.ChildAdded:Connect(function()
+    if MainAutoSectionAutoStandArrowTV then
+        BlockParalyzeStunF()
+    end
+end)
 
 local MainSection10 = MainTab:CreateSection("Miscellaneous")
 local MainSection10Button = MainTab:CreateButton({
@@ -601,6 +826,7 @@ UpdatesTab:CreateParagraph({Title = "27.12.2022", Content = "[+] Auto --> Stand 
 UpdatesTab:CreateParagraph({Title = "28.12.2022", Content = "[+] Anti Cheat Bypass\n[+] Auto Buy\n[+] Lair Quest Autofarm\n[+] Teleports\n[+] Drop/Hand Items\n[+] Open Stand Storage"})
 UpdatesTab:CreateParagraph({Title = "29.12.2022", Content = "[+] Quest Autofarm\n[*] Some things were patched during current game update, all of those things are now working again"})
 UpdatesTab:CreateParagraph({Title = "30.12.2022", Content = "[*] Fixed Auto Stand Arrow, Charged Arrow, Rokakaka bugs\n[*] Updated to current game version"})
+UpdatesTab:CreateParagraph({Title = "31.12.2022", Content = "[+] Block >> SCR,SCROVA Paralyze, HSP Stun\n[+] Stand Autofarm [!] [W.I.P]"})
 
 local Old; Old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
     local Method = getnamecallmethod()
